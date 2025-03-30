@@ -1,0 +1,23 @@
+int led = 9;       // LED connected to digital pin 9
+int potPin = A0;   // Potentiometer connected to analog pin A0
+
+void setup() {
+  pinMode(led, OUTPUT);
+  pinMode(potPin, INPUT);
+  Serial.begin(9600);  // Start serial communication at 9600 baud rate
+}
+
+void loop() {
+  int potValue = analogRead(potPin);  // Read potentiometer value (0-1023)
+  int ledIntensity = map(potValue, 0, 1023, 0, 255);  // Map to PWM range (0-255)
+
+  analogWrite(led, ledIntensity);  // Set LED brightness
+
+  // Print values to Serial Monitor
+  Serial.print("Potentiometer Value: ");
+  Serial.print(potValue);
+  Serial.print(" | LED Intensity: ");
+  Serial.println(ledIntensity);
+
+  delay(200);  // Small delay for readability
+}
