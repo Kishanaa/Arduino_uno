@@ -1,0 +1,25 @@
+#include <DHT.h>
+
+#define DHTPIN 2
+#define DHTTYPE DHT22
+int led = 9;
+// Initialize DHT sensor
+DHT dht(DHTPIN, DHTTYPE);
+
+void setup() {
+    pinMode(led, OUTPUT);
+    Serial.begin(9600);
+    dht.begin();  // Start DHT sensor
+}
+
+void loop() {
+    float temperatureC = dht.readTemperature();  // Read temperature in °C
+    int mapValue = map(temperatureC, 25, 34, 0, 255);
+    analogWrite(led, mapValue);
+
+    Serial.print("Temperature: ");
+    Serial.print(temperatureC);
+    Serial.println(" °C");
+
+    delay(2000);  // DHT22 needs a 2s delay between readings
+}
