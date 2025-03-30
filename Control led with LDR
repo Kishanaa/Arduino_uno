@@ -1,0 +1,23 @@
+
+int led=4;
+int ldr=A0;
+int threshold = 10;
+void setup()
+{
+  pinMode(led, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  int l_state = analogRead(ldr); // Read LDR value
+  Serial.println(l_state); 
+
+  if (l_state < threshold) {
+    digitalWrite(led, HIGH); // Turn on LED
+  } else {
+    digitalWrite(led, LOW);  // Turn off LED
+  }
+
+  delay(500);
+}
